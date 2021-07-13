@@ -22,6 +22,7 @@ include "conexion.php";
     <link rel="stylesheet" href="bootstrap/js/popper.min.js">
     <link rel="stylesheet" href="bootstrap/js/bootstrap.bundle.min.js">
     <link rel="stylesheet" href="bootstrap/js/bootstrap.bundle.js"> -->
+    <link rel="stylesheet" href="fontawesome/js/all.min.js">
 
     <!-- <script type="text/javascript">
         $(window).on("load",function() {
@@ -139,7 +140,7 @@ include "conexion.php";
 
             </div>
             <!-- <button type="submit" class="btn btn-primary" name="btn_validar" id="btn_validar" text-center>Crear nueva publicidad</button> -->
-            <button type="button" class="btn btn-primary my-2 aaaa" id="btn_validar">Crear nueva publicidad</button>
+            <button type="submit" class="btn btn-primary my-2 aaaa" id="btn_validar">Crear nueva publicidad</button>
         </form>
     </div>
 

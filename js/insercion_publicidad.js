@@ -183,7 +183,7 @@ document.getElementById('botonAccion').addEventListener('click', function (event
 
 
 
-document.getElementById('btn_validar').addEventListener('click', function (event) {
+document.getElementById('form_publicidad').addEventListener('submit', function (event) {
     //Previene a que el form se envie cuando valida los datos
     event.preventDefault();
 
@@ -357,7 +357,8 @@ document.getElementById('btn_validar').addEventListener('click', function (event
 function cargando(cargar) {
     if (cargar) {
         $("#btn_validar").attr('disabled',  true)
-        $("#btn_validar").html('Validando')
+        
+        $("#btn_validar").html('  <i class="fas fa-spinner fa-spin"></i> Validando...')
     } else {
         $("#btn_validar").attr('disabled',  false)
         $("#btn_validar").html('Crear nueva publicidad')
