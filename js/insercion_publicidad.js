@@ -247,18 +247,43 @@ document.getElementById('form_publicidad').addEventListener('submit', function (
     var minutoActual = ('0' + minutosActual).slice(-2);
 
     var hoy = new Date();
+    var dia_x = hoy.toLocaleDateString();
+    var dia_now = dia_x.split("/", 1);
+    var mes_now = ('0' + (hoy.getMonth()+1)).slice(-2);
+    var hora_now = ('0' + (hoy.getMinutes())).slice(-2);
+/////////////FECHA Y HORA cuando se presiona el boton enviar///////
+    var dia_actual = hoy.getFullYear()+"/"+mes_now+"/"+dia_now; // 2021/07/13
+        // var hora_actual = hoy.getHours()+":"+hoy.getMinutes(); // 13:45
+    var hora_actual = hoy.getHours()+":"+hora_now;
+    // console.log(dia_actual);    
+    // console.log(hora_actual);    
+    ////////////
 
     var ActualMes = hoy.getMonth() + 1;
     var ActualDia = hoy.getDate();
     var ActualAnio = hoy.getFullYear();
-    var FechaActualCompleta = ActualAnio + '-' + ActualMes + '-' + ActualDia;
+    var FechaActualCompleta = ActualAnio + '-' + mes_now + '-' + dia_now +' '+ hora_actual;
     console.log(FechaActualCompleta);
-    var nDateH = new Date(FechaActualCompleta);
+    var nDateH = FechaActualCompleta; ///ESTA VARIABLE ALMACENA LA FECHA,DIA Y HORA FORMATEADAS AL TIPO DE LA BASE DE DATOS
+    console.log(nDateH);
+    /// VALIDAR QUE LA FECHA DE INICIO SEA MAYOR QUE LA FECHA ACTUAL, NO IGUAL .
 
     var PFechActual = Date.parse(nDateH);
-    var FechaActualSis = PFechActual - 21600000;
+    var FechaActualSis = PFechActual;
+
+
     var PFechaInicio = Date.parse(inputSfechaInicio);
     var PFechaFinal = Date.parse(inputSfechaFinal);
+
+    console.log("Variables validas");
+    console.log("Variable nDateH(FechaActualCompleta) sin parsear");
+    console.log(nDateH);
+    console.log("Fecha actual nDateH: "+PFechActual);
+
+    console.log("Input fecha y hora inicio: "+iFechaHInicio);
+    console.log("Fecha hora inicio parseada: "+PFechaInicio);
+    console.log("Input fecha y hora final: "+iFechaHFinal);
+    console.log("Fecha hora final parseada: "+PFechaFinal);
 
     console.log(nDateH);
     console.log("");
@@ -271,20 +296,27 @@ document.getElementById('form_publicidad').addEventListener('submit', function (
     console.log(PFechaFinal);
 
 
-    console.log(inputSfechaInicio + ' ' + inputShoraInicio);
-    console.log(inputSfechaFinal + ' ' + inputShoraFinal);
+        // console.log(inputSfechaInicio + ' ' + inputShoraInicio);
+        // console.log(inputSfechaFinal + ' ' + inputShoraFinal);
     // var datePHoy = Date.parse(fechaHoy);
     // console.log(datePHoy);
     // var dateFHoy = dateFormat(datePHoy, "yyyy, mm, dd");
     // var stringFhoy = dateFHoy.toString();
     // console.log(stringFhoy);
 
+    if(iFechaHInicio > iFechaHFinal){
+        console.log("La fecha de inicio es mayor a la final");
+    }else if (iFechaHInicio > nDateH){
+        console.log("La fecha de inicio es mayor a la actual");
+        console.log("Fecha de inicio: \n"+iFechaHInicio);
+        console.log("Fecha Actual: "+nDateH);
+    }
 
 
-
+    console.log("REVISADO EL 14/07/2021 A LAS 8:40PM DONDE SE REPARARON FALLAS DE CONDICIONALES DE LA HORA.");
     //La condicional compara que si el titulo esta vacio o que tenga menos de 5 caracteres automaticamente marcara que hay algun error y por ende no hara nada.
     if (valueTitulo == "" || lengthTitulo < 5) {
-        alert("Campo de titulo vacio o muy corto.")
+        alert("Campo de titulo vacio o muy corto.");
     } else if (lengthTitulo >= 35) {
         alert("La cantidad de caracteres en el titulo de publicidad excede los permitidos.");
     } else if (inputSfechaInicio == "" || inputSfechaFinal == "" || inputShoraInicio == "" || inputShoraFinal == "") {
@@ -292,24 +324,29 @@ document.getElementById('form_publicidad').addEventListener('submit', function (
     }
     //Revisar 
     else if (iFechaHInicio == iFechaHFinal) {
-        alert("Fecha, hora de inicio y Fecha, hora final son iguales.\nVerifica e intentalo nuevamente.");
+        alert("La fecha y hora de inicio y final no pueden ser identicas.\nVerifica e intentalo nuevamente.");
     } //Esta linea sirve para validar los formatos de fecha
-    else if (FechaActualSis > PFechaInicio) {
+    else if (nDateH > PFechaInicio) {
         alert("Ingresa una fecha inicial posterior a la fecha actual.");
-    } else if (PFechaFinal < FechaActualSis) {
-        alert("La fecha final es menor a la fecha actual.");
-    } else if (PFechaInicio < FechaActualSis && PFechaFinal < FechaActualSis) {
+    }else if(iFechaHInicio < nDateH){
+        alert("La fecha y hora de inicio no puede ser menor a la fecha y hora actual.\n"+iFechaHInicio+"\n"+nDateH);
+    } else if (iFechaHFinal < nDateH) {
+        console.log(hora_actual);
+        alert("La fecha y hora final no puede ser menor a la fecha y hora actual.");
+    } else if (iFechaHInicio < nDateH && iFechaHFinal < nDateH) {
         alert("La fecha inicial y final son menores a la actual, ingresa una fecha valida.");
     } else if (inputSfechaInicio > inputSfechaFinal) {
         alert("La fecha inicio es mayor a la fecha final.");
-    } else if (inputShoraInicio >= inputShoraFinal) {
-        alert("La hora final es mayor o igual a la hora inicial.");
-    } else if (fechaHoy > inputSfechaFinal) {
+    } else if ( inputShoraInicio  >= inputShoraFinal) {
+        alert("La hora INICIAL es mayor o igual a la hora FINAL.");
+    } else if (nDateH > iFechaHFinal) {
+        console.log(nDateH);
+        console.log(inputSfechaFinal);
         alert("La fecha de hoy es mayor a la final.");
-    } else if (iFechaHInicio < fechaHoy) {
+    } else if (iFechaHInicio < nDateH) {
         console.log(iFechaHInicio);
         console.log(fechaHoy);
-        alert("La fecha de inicio es menor a la de hoy.");
+        alert("La fecha de inicio no puede ser menor a la actual.");
     } else if (iFechaHInicio > iFechaHFinal) {
         alert("La fecha de inicio es mayor a la fecha final.");
     } else if (iFechaHInicio == iFechaHFinal) {
@@ -320,7 +357,7 @@ document.getElementById('form_publicidad').addEventListener('submit', function (
         alert("Selecciona un dispositivo.")
     } else if (valueTexto == "" && valInputArchivo.files.length === 0) {
         alert("Por favor adjunta texto o contenido multimedia a tu publicidad.");
-    }   else if (archivo == false || cantText <=4 ) {
+    }   else if (archivo == false && cantText <=4 ) {
         alert("Muy poco texto o descripcion de la publicidad. \nIngresa desde 5 caracteres.\nIngresaste "+cantText+" Caracteres.");
     }else if(archivo == true){
             var i = document.getElementById("texto").value= "";
@@ -358,7 +395,7 @@ function cargando(cargar) {
     if (cargar) {
         $("#btn_validar").attr('disabled',  true)
         
-        $("#btn_validar").html('  <i class="fas fa-spinner fa-spin"></i> Validando...')
+        $("#btn_validar").html('Validando...')
     } else {
         $("#btn_validar").attr('disabled',  false)
         $("#btn_validar").html('Crear nueva publicidad')

@@ -35,7 +35,7 @@ include "conexion.php";
 
 
     <div class="container">
-        <form action="php/cargar_publicidad.php" method="POST" enctype="multipart/form-data" id="form_publicidad">
+        <form action="" method="POST" enctype="multipart/form-data" id="form_publicidad">
 
             <div class="form-group">
                 <a href="index.php">Inicio</a>
