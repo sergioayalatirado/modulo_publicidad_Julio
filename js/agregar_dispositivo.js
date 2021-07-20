@@ -46,7 +46,7 @@ document.getElementById("formr_dispositivo").addEventListener('submit', function
         // alert("Los datos han sido procesados exitosamente.\nEspera un momento.")
         $.ajax({
             type: 'POST',
-            url: 'php/agregar_dispositivo.php',
+            url: '../php/agregar_dispositivo.php',
             data: {
                 'nombre_dispositivo': valueDispositivo,
                 'tipo_dispositivo': valueTipo_disp,

@@ -370,7 +370,7 @@ document.getElementById('form_publicidad').addEventListener('submit', function (
         var formData = new FormData(document.getElementById("form_publicidad"));
         $.ajax({
             type: 'POST',
-            url: 'php/verify_horario.php',
+            url: '../../metodos/php/verify_horario.php',
             dataType: "html",
             data: formData,
             cache: false,

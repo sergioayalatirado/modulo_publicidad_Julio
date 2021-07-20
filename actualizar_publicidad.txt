@@ -1,4 +1,0 @@
-Actualizar publicidad
-UPDATE publicidad 
-SET titulo_publicidad = '' ,url_archivo = '' ,extension_archivo= '',tipo_archivo= '',fecha_hora_inicio= '',fecha_hora_final='',estatus='',texto='',fk_sucursal='', fk_dispositivo='' 
-WHERE id_publicidad=''
